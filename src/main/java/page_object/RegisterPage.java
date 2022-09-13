@@ -6,19 +6,9 @@ import org.openqa.selenium.support.How;
 
 public class RegisterPage {
 
-    public static final String Path = "register";
+    public static final String Path = "/register";
 
-    @FindBy(how = How.XPATH, using = ".//p[text()='Конструктор']")
-    private SelenideElement constructorButton;
 
-    @FindBy(how = How.XPATH, using = ".//p[text()='Лента Заказов']")
-    private SelenideElement ordersFeed;
-
-    @FindBy(how = How.XPATH, using = ".//p[text()='Личный Кабинет']")
-    private SelenideElement profile;
-
-    @FindBy(how = How.XPATH, using = ".//div[@class='AppHeader_header__logo__2D0X2']")
-    private SelenideElement stellarLogo;
 
     @FindBy(how = How.XPATH, using = ".//label[text()='Имя']")
     private SelenideElement nameInput;

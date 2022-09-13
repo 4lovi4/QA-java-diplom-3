@@ -10,5 +10,8 @@ import org.openqa.selenium.support.How;
 import java.time.LocalDate;
 
 public class ConstructorPage {
+    public final String URL = "https://stellarburgers.nomoreparties.site";
+
+
 
 }
