@@ -3,6 +3,7 @@ package page_object;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import static com.codeborne.selenide.Selenide.page;
 
 public class StellarHeader {
     @FindBy(how = How.XPATH, using = ".//p[text()='Конструктор']")
@@ -17,4 +18,13 @@ public class StellarHeader {
     @FindBy(how = How.XPATH, using = ".//div[@class='AppHeader_header__logo__2D0X2']")
     private SelenideElement stellarLogo;
 
+    public ConstructorPage clickConstructor() {
+        constructorButton.click();
+        return page(ConstructorPage.class);
+    }
+
+    public FeedPage clickOrderFeed() {
+        ordersFeed.click();
+        return  page(FeedPage.class);
+    }
 }

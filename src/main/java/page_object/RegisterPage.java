@@ -3,6 +3,8 @@ package page_object;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.*;
 
 public class RegisterPage {
 
@@ -24,4 +26,24 @@ public class RegisterPage {
 
     @FindBy(how = How.XPATH, using = ".//button[@class='button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_medium__3zxIa']")
     private SelenideElement registerButton;
+
+    public void enterLogin(String login) {
+        nameInput.sendKeys(login);
+    }
+
+    public void enterEmail(String email) {
+        emailInput.sendKeys(email);
+    }
+
+    public void enterPassword(String password) {
+        passwordInput.sendKeys(password);
+    }
+
+    public void clickREgisterButton() {
+        registerButton.click();
+    }
+
+    public void changePasswordVisibility() {
+        iconEye.click();
+    }
 }
