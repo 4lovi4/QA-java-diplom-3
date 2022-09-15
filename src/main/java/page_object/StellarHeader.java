@@ -27,4 +27,9 @@ public class StellarHeader {
         ordersFeed.click();
         return  page(FeedPage.class);
     }
+
+    public ProfilePage clickProfile() {
+        profile.click();
+        return page(ProfilePage.class);
+    }
 }
