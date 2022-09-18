@@ -1,4 +1,4 @@
-package page_object;
+package PageObject;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,9 +22,25 @@ public class LoginPage {
     @FindBy(how = How.XPATH, using = ".//button[@class='button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_medium__3zxIa']")
     private SelenideElement loginButton;
 
-    @FindBy(how = How.XPATH, using = ".//p[text()='Зарегистрироваться']")
+    @FindBy(how = How.XPATH, using = ".//a[text()='Зарегистрироваться']")
     private SelenideElement registerLink;
 
-    @FindBy(how = How.XPATH, using = ".//p[text()='Восстановить пароль']")
+    @FindBy(how = How.XPATH, using = ".//a[text()='Восстановить пароль']")
     private SelenideElement restorePasswordLink;
+
+    public void enterEmail(String email) {
+        emailInput.sendKeys(email);
+    }
+
+    public void enterPassword(String password) {
+        passwordInput.sendKeys(password);
+    }
+
+    public void clickLoginButton() {
+        loginButton.click();
+    }
+
+    public void changePasswordVisibility() {
+        iconEye.click();
+    }
 }

@@ -1,10 +1,11 @@
-package page_object;
+package PageObject;
 
 import com.codeborne.selenide.SelenideElement;
+import static com.codeborne.selenide.Selenide.page;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.*;
+
+import java.util.List;
 
 public class RegisterPage {
 
@@ -12,14 +13,14 @@ public class RegisterPage {
 
     private StellarHeader stellarHeader;
 
-    @FindBy(how = How.XPATH, using = ".//label[text()='Имя']")
-    private SelenideElement nameInput;
+    @FindBy(how = How.XPATH, using = ".//input[@name='name']")
+    private List<SelenideElement> nameEmailInputs;
 
-    @FindBy(how = How.XPATH, using = ".//label[text()='Email']")
-    private SelenideElement emailInput;
-
-    @FindBy(how = How.XPATH, using = ".//label[text()='Пароль']")
+    @FindBy(how = How.XPATH, using = ".//input[@name='Пароль']")
     private SelenideElement passwordInput;
+
+    @FindBy(how = How.XPATH, using = ".//input[@type='text' and @name='Пароль']")
+    private SelenideElement passwordInputOpen;
 
     @FindBy(how = How.XPATH, using = ".//div[@class='input__icon input__icon-action']")
     private SelenideElement iconEye;
@@ -28,22 +29,27 @@ public class RegisterPage {
     private SelenideElement registerButton;
 
     public void enterLogin(String login) {
-        nameInput.sendKeys(login);
+        nameEmailInputs.get(0).sendKeys(login);
     }
 
     public void enterEmail(String email) {
-        emailInput.sendKeys(email);
+        nameEmailInputs.get(1).sendKeys(email);
     }
 
     public void enterPassword(String password) {
         passwordInput.sendKeys(password);
     }
 
-    public void clickREgisterButton() {
+    public LoginPage clickRegisterButton() {
         registerButton.click();
+        return page(LoginPage.class);
     }
 
     public void changePasswordVisibility() {
         iconEye.click();
+    }
+
+    public SelenideElement getPasswordInputOpen() {
+        return this.passwordInputOpen;
     }
 }

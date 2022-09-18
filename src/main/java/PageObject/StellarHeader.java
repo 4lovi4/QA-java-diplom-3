@@ -1,4 +1,4 @@
-package page_object;
+package PageObject;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
