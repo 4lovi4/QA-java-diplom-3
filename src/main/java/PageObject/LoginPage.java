@@ -28,6 +28,9 @@ public class LoginPage {
     @FindBy(how = How.XPATH, using = ".//a[text()='Восстановить пароль']")
     private SelenideElement restorePasswordLink;
 
+    @FindBy(how = How.XPATH, using = "//h2[text()='Вход']")
+    public SelenideElement entranceTitle;
+
     public void enterEmail(String email) {
         emailInput.sendKeys(email);
     }

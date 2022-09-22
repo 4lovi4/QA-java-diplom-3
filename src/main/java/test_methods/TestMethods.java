@@ -2,39 +2,47 @@ package test_methods;
 
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
 import api.ApiClient;
 import api.User;
 import api.AuthResponse;
 
 public class TestMethods {
+
+    private ApiClient client = new ApiClient();
+
     public static String randomEmail() {
         return String.format("%s@%s.test", RandomStringUtils.randomAlphanumeric(4, 10), RandomStringUtils.randomAlphanumeric(4, 10));
     }
 
+    public static String randomAlfaNum(int minLen, int maxLen) {
+        return RandomStringUtils.randomAlphanumeric(minLen, maxLen);
+    }
+
     public static String randomAlfaNum() {
-        return RandomStringUtils.randomAlphanumeric(4, 16);
+        return RandomStringUtils.randomAlphanumeric(6, 20);
     }
 
     @Step("Регистрация пользовтеля через API")
-    public void registerUser(String login, String email, String passwd) {
-        ApiClient client = new ApiClient();
-        User user = new User(email, passwd, login);
-        AuthResponse register = client.createUser(user).as(AuthResponse.class);
+    public AuthResponse registerUser(String email, String passwd, String name) {
+        User user = new User(email, passwd, name);
+        return client.createUser(user).as(AuthResponse.class);
     }
 
     @Step("Авторизация пользователя через API")
-    public void authUser() {
-
+    public AuthResponse authUser(String email, String passwd) {
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(passwd);
+        return client.loginUser(user).as(AuthResponse.class);
     }
 
     @Step("Получение информации о пользователе через API")
-    public void userInfo() {
-
+    public AuthResponse userInfo(String token) {
+        return  client.getUserInfo(token).as(AuthResponse.class);
     }
 
     @Step("Удалить пользователя через API")
-    public void deleteUser() {
-
+    public void deleteUser(String token) {
+        client.deleteUser(token);
     }
 }
