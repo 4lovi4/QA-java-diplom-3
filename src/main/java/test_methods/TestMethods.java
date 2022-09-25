@@ -5,6 +5,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import api.ApiClient;
 import api.User;
 import api.AuthResponse;
+import api.Token;
 
 public class TestMethods {
 
@@ -44,5 +45,9 @@ public class TestMethods {
     @Step("Удалить пользователя через API")
     public void deleteUser(String token) {
         client.deleteUser(token);
+    }
+
+    public void logoutUser(String refreshToken) {
+        client.logoutUser(new Token(refreshToken));
     }
 }

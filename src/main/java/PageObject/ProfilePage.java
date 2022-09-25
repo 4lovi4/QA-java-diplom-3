@@ -4,6 +4,8 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.page;
+
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -17,13 +19,13 @@ public class ProfilePage {
 
     public StellarHeader stellarHeader = page(StellarHeader.class);
 
-    @FindBy(how= How.LINK_TEXT, using = "Выход")
+    @FindBy(how= How.XPATH, using = ".//button[text()='Выход']")
     private SelenideElement exitLink;
 
-    @FindBy(how= How.LINK_TEXT, using = "Профиль")
+    @FindBy(how= How.XPATH, using = ".//a[text()='Профиль']")
     private SelenideElement profileLink;
 
-    @FindBy(how= How.LINK_TEXT, using = "История заказов")
+    @FindBy(how= How.XPATH, using = ".//a[text()='История заказов']")
     private SelenideElement historyLink;
 
     @FindBy(how = How.XPATH, using = ".//input[@name='Name' and @type='text']")
@@ -40,6 +42,11 @@ public class ProfilePage {
 
     @FindBy(how = How.XPATH, using = ".//button[text()='Отмена']")
     private SelenideElement cancelButton;
+
+    @Step("Проверка загрузки Профиля")
+    public void checkProfile() {
+        this.profileLink.shouldBe(Condition.appear);
+    }
 
     public void clickEditName() {
         nameInput.find(byXpath(".//div[@class='input__icon input__icon-action']")).click();
@@ -65,5 +72,4 @@ public class ProfilePage {
         exitLink.click();
         return page(LoginPage.class);
     }
-
 }

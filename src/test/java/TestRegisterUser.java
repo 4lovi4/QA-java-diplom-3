@@ -1,5 +1,6 @@
 import PageObject.LoginPage;
 import api.AuthResponse;
+import org.junit.After;
 import test_methods.TestMethods;
 import org.junit.Test;
 import PageObject.ConstructorPage;
@@ -11,11 +12,17 @@ import org.junit.Assert;
 import com.codeborne.selenide.Condition;
 
 import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.WebDriverRunner.closeWindow;
 import static com.codeborne.selenide.WebDriverRunner.url;
 import static test_methods.TestMethods.randomEmail;
 import static test_methods.TestMethods.randomAlfaNum;
 
 public class TestRegisterUser {
+
+    @After
+    public void clearTest() {
+        closeWindow();
+    }
 
     @Test
     @DisplayName("Регистрация пользователя через форму /register")
@@ -41,6 +48,7 @@ public class TestRegisterUser {
         Assert.assertTrue(userInfo.getSuccess());
         Assert.assertEquals(name, userInfo.getUser().getName());
         Assert.assertEquals(email.toLowerCase(), userInfo.getUser().getEmail());
+        testMethods.logoutUser(authResponse.getRefreshToken());
         testMethods.deleteUser(authResponse.getAccessToken());
     }
 

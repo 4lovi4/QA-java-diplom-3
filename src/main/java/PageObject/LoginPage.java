@@ -1,9 +1,15 @@
 package PageObject;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.page;
+
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 
 public class LoginPage {
 
@@ -40,9 +46,15 @@ public class LoginPage {
         passwordInput.sendKeys(password);
     }
 
+    @Step("Авторизоваться и перейти в Конструктор")
     public ConstructorPage clickLoginButton() {
         loginButton.click();
         return page(ConstructorPage.class);
+    }
+
+    @Step("Проверка загрузки страницы")
+    public void checkLoginAppearance() {
+        entranceTitle.shouldBe(Condition.appear, Duration.of(3, ChronoUnit.SECONDS));
     }
 
     public void changePasswordVisibility() {

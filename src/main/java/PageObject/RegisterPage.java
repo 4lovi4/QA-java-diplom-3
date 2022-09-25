@@ -36,6 +36,9 @@ public class RegisterPage {
     @FindBy(how = How.XPATH, using = ".//p[@class='input__error text_type_main-default']")
     private SelenideElement passwordIncorrectMessage;
 
+    @FindBy(how = How.XPATH, using = ".//a[@class='Auth_link__1fOlj']")
+    private SelenideElement loginLink;
+
     public void enterLogin(String login) {
         nameEmailInputs.get(0).sendKeys(login);
     }
@@ -58,6 +61,12 @@ public class RegisterPage {
     public RegisterPage clickRegisterButtonIncorrect() {
         registerButton.click();
         return page(RegisterPage.class);
+    }
+
+    @Step("Перейти по ссылке на станицу автоизации /login")
+    public LoginPage clickLoginLink() {
+        loginLink.click();
+        return page(LoginPage.class);
     }
 
     @Step("Нажать на кнопку скрыть пароль")
