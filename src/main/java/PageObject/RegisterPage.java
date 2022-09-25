@@ -14,9 +14,9 @@ import java.util.List;
 
 public class RegisterPage {
 
-    public static final String Path = "/register";
+    public static final String PATH = "/register";
 
-    private StellarHeader stellarHeader;
+    public StellarHeader stellarHeader = page(StellarHeader.class);
 
     @FindBy(how = How.XPATH, using = ".//input[@name='name']")
     private List<SelenideElement> nameEmailInputs;

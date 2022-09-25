@@ -19,17 +19,17 @@ public class StellarHeader {
     private SelenideElement stellarLogo;
 
     public ConstructorPage clickConstructor() {
-        constructorButton.click();
+        this.constructorButton.click();
         return page(ConstructorPage.class);
     }
 
     public FeedPage clickOrderFeed() {
-        ordersFeed.click();
+        this.ordersFeed.click();
         return  page(FeedPage.class);
     }
 
-    public ProfilePage clickProfile() {
-        profile.click();
-        return page(ProfilePage.class);
+    public LoginPage clickProfile() {
+        this.profile.click();
+        return page(LoginPage.class);
     }
 }

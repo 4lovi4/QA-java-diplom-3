@@ -23,7 +23,7 @@ public class TestRegisterUser {
             "проверить что открылась страницы /login, " +
             "проверить, что можно залогиниться")
     public void checkUserRegister() {
-        RegisterPage registerPage = open(ConstructorPage.URL + RegisterPage.Path, RegisterPage.class);
+        RegisterPage registerPage = open(ConstructorPage.URL + RegisterPage.PATH, RegisterPage.class);
         String name = randomAlfaNum();
         String passwd = randomAlfaNum();
         String email = randomEmail();
@@ -34,7 +34,7 @@ public class TestRegisterUser {
         registerPage.checkPasswordInputOpen();
         LoginPage loginPage = registerPage.clickRegisterButton();
         loginPage.entranceTitle.shouldBe(Condition.visible);
-        Assert.assertEquals(ConstructorPage.URL + LoginPage.Path, url());
+        Assert.assertEquals(ConstructorPage.URL + LoginPage.PATH, url());
         TestMethods testMethods = new TestMethods();
         AuthResponse authResponse = testMethods.authUser(email, passwd);
         AuthResponse userInfo = testMethods.userInfo(authResponse.getAccessToken());
@@ -49,7 +49,7 @@ public class TestRegisterUser {
     @Description("При регистрации через UI на странице /register ввести пароль длинной меньше 6 символов. " +
     "Получаем ошибку \"Некорректный пароль\"")
     public void checkIncorrectPasswordRegister() {
-        RegisterPage registerPage = open(ConstructorPage.URL + RegisterPage.Path, RegisterPage.class);
+        RegisterPage registerPage = open(ConstructorPage.URL + RegisterPage.PATH, RegisterPage.class);
         String name = randomAlfaNum();
         String passwd = randomAlfaNum(1, 5);
         String email = randomEmail();

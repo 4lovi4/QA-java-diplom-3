@@ -7,9 +7,9 @@ import static com.codeborne.selenide.Selenide.page;
 
 public class RestorePasswordPage {
 
-    public static final String Path = "/forgot-password";
+    public static final String PATH = "/forgot-password";
 
-    private StellarHeader stellarHeader;
+    public StellarHeader stellarHeader = page(StellarHeader.class);
 
     @FindBy(how = How.XPATH, using = ".//input[@name='name']")
     private SelenideElement emailInput;

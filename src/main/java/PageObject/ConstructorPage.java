@@ -1,8 +1,74 @@
 package PageObject;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+
+import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
+
 public class ConstructorPage {
     public final static String URL = "https://stellarburgers.nomoreparties.site";
 
-    private StellarHeader stellarHeader;
+    public StellarHeader stellarHeader = page(StellarHeader.class);
+
+    @FindBy(how = How.XPATH, using = ".//h1[text()='Соберите бургер']")
+    private SelenideElement constructorTitle;
+
+    @FindBy(how = How.XPATH, using = ".//div[@class='BurgerIngredients_ingredients__menuContainer__Xu3Mo']")
+    private SelenideElement menuIngredientsContainer;
+
+    @FindBy(how = How.XPATH, using = ".//span[text()='Булки']")
+    private SelenideElement bunTitle;
+
+    @FindBy(how = How.XPATH, using = ".//span[text()='Соусы']")
+    private SelenideElement sauceTitle;
+
+    @FindBy(how = How.XPATH, using = ".//span[text()='Начинки']")
+    private SelenideElement toppingTitle;
+
+    @FindBy(how = How.XPATH, using = ".//a[@class='BurgerIngredient_ingredient__1TVf6 ml-4 mr-4 mb-8']")
+    private List<SelenideElement> ingredientsMenuList;
+
+    @FindBy(how = How.XPATH, using = ".//li[@class='BurgerConstructor_basket__listItem__aWMu1 mr-4']")
+    private List<SelenideElement> burgerConstructorBasketList;
+
+    @FindBy(how = How.XPATH, using = ".//div[@class='BurgerConstructor_basket__totalContainer__2Z-ho mr-10']")
+    private SelenideElement basketTotal;
+
+    @FindBy(how = How.XPATH, using = ".//button[text()='Оформить заказ']")
+    private SelenideElement makeOrderButton;
+
+    @FindBy(how = How.XPATH, using = ".//button[text()='Войти в аккаунт']")
+    private SelenideElement loginButton;
+
+    @FindBy(how = How.XPATH, using = ".//div[@class='Modal_modal__container__Wo2l_']")
+    private SelenideElement orderConfirmationModule;
+
+    public LoginPage clickLoginButton() {
+        loginButton.click();
+        return page(LoginPage.class);
+    }
+
+    public void checkConstructorLoggedIn() {
+        makeOrderButton.shouldBe(Condition.appear);
+    }
+
+    public void clickMakeOrder() {
+        makeOrderButton.click();
+        orderConfirmationModule.shouldBe(Condition.visible);
+    }
+
+    public void closeConfirmationModule() {
+        orderConfirmationModule.find(By.className("Modal_modal__close_modified__3V5XS Modal_modal__close__TnseK")).click();
+        orderConfirmationModule.shouldBe(Condition.disappear, Duration.of(1, ChronoUnit.SECONDS));
+    }
 
 }
