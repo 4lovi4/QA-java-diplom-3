@@ -7,9 +7,10 @@ import api.User;
 import api.AuthResponse;
 import api.Token;
 
+
 public class TestMethods {
 
-    private ApiClient client = new ApiClient();
+    private final ApiClient client = new ApiClient();
 
     public static String randomEmail() {
         return String.format("%s@%s.test", RandomStringUtils.randomAlphanumeric(4, 10), RandomStringUtils.randomAlphanumeric(4, 10));
